@@ -26,6 +26,6 @@ exports.login = async ({ username, password }) => {
     return token;
 }
 
-exports.register = (userData) => {
-    User.create(userData);
+exports.register = async (userData) => {
+    await User.create(userData);
 }
