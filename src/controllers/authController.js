@@ -11,6 +11,12 @@ router.get('/login', (req, res) => {
     res.render('auth/login')
 });
 
+router.get('/logout', (req, res) => {
+    res.clearCookie(AUTH_COOKIE_NAME);
+
+    res.redirect('/');
+});
+
 router.post('/register', async (req, res) => {
     const {name, username, password, repeatPassword} = req.body;
 
