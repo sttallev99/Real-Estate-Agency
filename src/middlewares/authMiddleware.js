@@ -9,7 +9,6 @@ exports.auth = function(req, res, next) {
             .then(decodedToken => {
                 req.user = decodedToken;
                 res.locals.user = decodedToken;
-                console.log(req.user)
                 next();
             })
             .catch(err => {
