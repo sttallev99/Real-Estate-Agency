@@ -42,4 +42,22 @@ router.get('/:id/rent', async (req, res) => {
     res.redirect(`/housing/${req.params.id}/details`);
 });
 
+router.get('/:id/delete', async(req, res) => {
+    await housingService.delete(req.params.id);
+
+    res.redirect('/housing')
+});
+
+router.get('/:id/edit', async(req, res) => {
+    let housing = await housingService.getOne(req.params.id);
+
+    res.render('housing/edit', { ...housing.toObject() })
+});
+
+router.post('/:id/edit', async(req, res) => {
+    await housingService.updateHousing(req.params.id, req.body);
+
+    res.redirect(`/housing/${req.params.id}/details`);
+});
+
 module.exports = router;

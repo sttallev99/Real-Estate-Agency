@@ -12,3 +12,5 @@ exports.addTenant = async(housingId, tenantId) => {
             $inc: { availablePieces: -1}
         });
 }
+exports.delete = async(id) => Housing.findByIdAndDelete(id);
+exports.updateHousing = async(id, data) => Housing.findByIdAndUpdate(id, data);
