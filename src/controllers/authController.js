@@ -27,7 +27,7 @@ router.post('/register', async (req, res) => {
     }
 
     try {
-        authService.register({
+        await authService.register({
             name,
             username,
             password,
