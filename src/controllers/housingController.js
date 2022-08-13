@@ -18,7 +18,8 @@ router.post('/create',isAuth,  async(req, res) => {
         await housingService.create({ ...req.body, owner: req.user._id });
         res.redirect('/housing');
     } catch(err) {
-        console.log(err);
+        console.log(err)
+        res.render('housing/create', { error: getErrorMessage(err) });
     }
 
 });
@@ -78,6 +79,16 @@ async function isntOwner(req, res, next) {
         next();
     } else {
         res.redirect(`/housing/${req.params.id}/details`);
+    }
+}
+
+function getErrorMessage(error) {
+    let errorNames = Object.keys(error.errors);
+
+    if(errorNames.length > 0) {
+        return error.errors[errorNames[0]];
+    } else {
+        return error.message;
     }
 }
 

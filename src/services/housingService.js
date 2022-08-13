@@ -10,7 +10,9 @@ exports.addTenant = async(housingId, tenantId) => {
         { 
             $push: {tenants: tenantId },
             $inc: { availablePieces: -1}
-        });
+        },
+        { runValidators: true });
 }
 exports.delete = async(id) => Housing.findByIdAndDelete(id);
 exports.updateHousing = async(id, data) => Housing.findByIdAndUpdate(id, data);
+exports.search = async(text) => Housing.find({ type: { $regex: text, $options: 'i' }}).lean();
