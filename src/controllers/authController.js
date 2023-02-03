@@ -47,6 +47,8 @@ router.post('/register', async (req, res) => {
 
         res.redirect('/')
     }catch(err) {
+        res.send(err.message);
+        res.end();
         // TODO: return error response 
     }
 

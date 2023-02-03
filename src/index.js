@@ -9,6 +9,7 @@ const app = express();
 
 require('./config/hbsConfig.js')(app);
 require('./config/expressConfig.js')(app);
+
 app.use(routes);
 
 initDatabase()
