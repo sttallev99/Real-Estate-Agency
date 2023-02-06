@@ -4,7 +4,7 @@ const { JWT_SECRET } = require('../constants.js')
 
 
 exports.login = async ({ username, password }) => {
-    let user = await User.findOne(username);
+    let user = await User.findOne({username});
 
     if(!user) {
         throw new Error('Invalid username or password ');
