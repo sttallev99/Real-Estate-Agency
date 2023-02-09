@@ -50,6 +50,12 @@ router.get('/:housingId/edit', async (req, res) => {
     housing = await housingService.getOne(req.params.housingId);
 
     res.render('housing/edit', { ...housing.toObject() })
+});
+
+router.post('/:housingId/edit', async (req, res) => {
+    await housingService.updateOne(req.params.housingId, req.body);
+
+    res.redirect(`/housing/${req.params.housingId}`);
 })
 
 
