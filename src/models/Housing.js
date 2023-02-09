@@ -45,7 +45,7 @@ const housingSchema = new mongoose.Schema({
 });
 
 housingSchema.method('getTenants', function() {
-    return this.tenants.map(x => x.name).join(' ,');    
+    return this.tenants.map(x => x.name).join(', ');    
 });
 
 const Housing = mongoose.model('Housing', housingSchema);

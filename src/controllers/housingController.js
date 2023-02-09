@@ -26,8 +26,19 @@ router.get('/:housingId', async (req, res) => {
     let tenants = housing.getTenants();
 
     let housingData = housing.toObject();
+    let isAvailable = housing.availablePieces > 0;
+    let isRented = housing.tenants.some(x => x._id == req.user?._id);
 
-    res.render('housing/details', { ...housingData, isOwner, tenants })
+
+    res.render('housing/details', { ...housingData, isOwner, tenants, isAvailable, isRented })
 });
+
+router.get('/:housingId/rent', async (req, res) => {
+    
+    await housingService.addTenant(req.params.housingId, req.user._id);
+
+    res.redirect(`/housing/${req.params.housingId}`)
+})
+
 
 module.exports = router;

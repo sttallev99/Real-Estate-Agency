@@ -30,9 +30,13 @@
                         <a href="#" class="edit">Edit</a>
                         <a href="#" class="remove">Delete</a>
                     {{else if user}}
-                        <a href="#" class="rentHome">Rent a home, available {{availablePieces}} housing</a>
-                        <p class="alRentHome">You have already rent this home</p>
-                        <p class="no-housing">No Housing Available!</p>
+                        {{#if isRented}}
+                            <p class="alRentHome">You have already rent this home</p>
+                        {{else if isAvailable}}
+                            <a href="/housing/{{_id}}/rent" class="rentHome">Rent a home, available {{availablePieces}} housing</a>
+                        {{else}}
+                            <p class="no-housing">No Housing Available!</p>
+                        {{/if}}
                     {{/if}}
                 </div>
             </div>
