@@ -8,7 +8,7 @@ exports.getAll = () => Housing.find().lean();
 
 exports.getOne = (housingId) => Housing.findById(housingId).populate('tenants');
 
-exports.addTenant = async (housingId, tenantId) => {
+exports.addTenant = (housingId, tenantId) => {
     return Housing.findOneAndUpdate(
         {_id: housingId}, 
         { 
@@ -16,3 +16,5 @@ exports.addTenant = async (housingId, tenantId) => {
             $inc: { availablePieces: -1 }
         })
 }
+
+exports.delete = (housingId) => Housing.findByIdAndDelete(housingId);

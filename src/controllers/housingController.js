@@ -38,6 +38,18 @@ router.get('/:housingId/rent', async (req, res) => {
     await housingService.addTenant(req.params.housingId, req.user._id);
 
     res.redirect(`/housing/${req.params.housingId}`)
+});
+
+router.get('/:housing/delete', async (req, res) => {
+    await housingService.delete(req.params.housing);
+
+    res.redirect('/housing');
+});
+
+router.get('/:housingId/edit', async (req, res) => {
+    housing = await housingService.getOne(req.params.housingId);
+
+    res.render('housing/edit', { ...housing.toObject() })
 })
 
 
