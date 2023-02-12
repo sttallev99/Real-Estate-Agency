@@ -14,9 +14,12 @@ exports.addTenant = (housingId, tenantId) => {
         { 
             $push: { tenants: tenantId },
             $inc: { availablePieces: -1 }
-        })
+        },
+        { runValidators: true })
 }
 
 exports.updateOne = (housingId, housingData) => Housing.findOneAndUpdate(housingId, housingData);
 
 exports.delete = (housingId) => Housing.findByIdAndDelete(housingId);
+
+exports.search = (text) => Housing.find({ type: { $regex: text, $options: 'i'}}).lean();
